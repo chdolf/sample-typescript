@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: typescript
-          image: action123.jfrog.io/typescript/typescript-image:latest{{github.run_number}}
+          image: demoactions.jfrog.io/typescript/typescript-image:2
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
