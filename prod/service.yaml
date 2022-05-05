@@ -1,0 +1,11 @@
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: typescript
+spec:
+  type: LoadBalancer
+  selector:
+    app: typescript
+    tier: frontend
+  ports:
