@@ -96,7 +96,7 @@ jobs:
         name: Build & push Docker image
         id: docker_build_and_push
         with:
-          image: images/typescript-image
+          image: typescript/typescript-image
           tags: ${{github.run_number}}
           registry: demoactions.jfrog.io
           dockerfile: Dockerfile
@@ -107,7 +107,7 @@ jobs:
         id: trivy_scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'demoactions.jfrog.io/images/typescript-image:${{github.run_number}}'
+          image-ref: 'demoactions.jfrog.io/typescript/typescript-image:${{github.run_number}}'
           format: 'table'
           exit-code: '0'
           ignore-unfixed: true
@@ -121,7 +121,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          image: demoactions.jfrog.io/images/typescript-image:${{github.run_number}}
+          image: demoactions.jfrog.io/typescript/typescript-image:${{github.run_number}}
           args: --json-file-output=snyk.json
         
       - name: json to html report
@@ -142,7 +142,7 @@ jobs:
         with:
           valueFile: 'deployments/dev/deployment.yaml'
           propertyPath: 'spec.template.spec.containers[0].image'
-          value: demoactions.jfrog.io/images/typescript-image:${{github.run_number}}
+          value: demoactions.jfrog.io/typescript/typescript-image:${{github.run_number}}
           commitChange: true
           updateFile: true
           targetBranch: dev
@@ -227,7 +227,7 @@ jobs:
         with:
           valueFile: 'deployments/qa/deployment.yaml'
           propertyPath: 'spec.template.spec.containers[0].image'
-          value: demoactions.jfrog.io/images/typescript-image:${{github.run_number}}
+          value: demoactions.jfrog.io/typescript/typescript-image:${{github.run_number}}
           commitChange: true
           updateFile: true
           masterBranchName: main
@@ -297,7 +297,7 @@ jobs:
         with:
           valueFile: 'deployments/prod/deployment.yaml'
           propertyPath: 'spec.template.spec.containers[0].image'
-          value: demoactions.jfrog.io/images/typescript-image:${{github.run_number}}
+          value: demoactions.jfrog.io/typescript/typescript-image:${{github.run_number}}
           commitChange: true
           masterBranchName: main
           updateFile: true
